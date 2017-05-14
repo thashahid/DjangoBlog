@@ -1,5 +1,8 @@
 # DjangoBlog
 
+> This project uses MySQL for the database but it is not a requirement. The following
+instructions are to set up your MySQL configuration.
+
 You will need to create a `db.cnf` file in the root directory with the following
 structure:
 
@@ -8,7 +11,7 @@ structure:
 database =
 host =
 user =
-password = ~~
+password =
 default-character-set = utf8
 ```
 
