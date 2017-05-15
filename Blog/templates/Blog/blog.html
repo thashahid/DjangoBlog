@@ -40,7 +40,8 @@
 <div class="row">
   <div class="col-md-8">
     <h2>{{ blog.post_title }}</h2>
-    <p>{{ blog.post_body }}</p>
+    <p>{{ blog.post_body|linebreaks }}</p>
+    <br/>
     <p>{{ blog.date_published }} | {{ blog.owner.username }}</p>
     {% if user == blog.owner %}
       <a class="btn btn-default">Edit</a>
