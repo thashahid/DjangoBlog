@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block navbar %}
 <div class="navbar-header">
@@ -12,7 +13,7 @@
 </div>
 <div class="collapse navbar-collapse" id="collapse">
    <ul class="nav navbar-nav">
-     <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+     <li><a href="/">Home</a></li>
      <li><a href="/">About</a></li>
    </ul>
    <ul class="nav navbar-nav navbar-right">
@@ -33,20 +34,15 @@
 {% endblock %}
 
 {% block content %}
-<h1>DjangoBlog</h1>
-<p>A demo blog app built in Django 1.11</p>
-<hr/>
-<br/>
 <div class="row">
-  <div class="col-md-8">
-    {% for post in posts %}
-      <h2>{{ post.post_title }}</h2>
-      <P>{{ post.post_body|truncatechars:300 }} <a href="{% url 'blog' post.id %}">Read More</a></p>
-      <br>
-    {% endfor %}
-  </div>
-  <div class="col-md-4">
-    <h4>Archives</h4>
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Create Blog Post</h2>
+    <hr>
+    <form class="form" method="post" action="">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-primary">Create!</button>
+    </form>
   </div>
 </div>
 {% endblock %}

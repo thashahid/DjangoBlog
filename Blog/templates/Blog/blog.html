@@ -16,6 +16,20 @@
      <li><a href="/">Home</a></li>
      <li><a href="/">About</a></li>
    </ul>
+   <ul class="nav navbar-nav navbar-right">
+     {% if user.is_authenticated %}
+       <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/create">Create Blog Post</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </li>
+     {% else %}
+       <li><a href="/signin">Sign In</a></li>
+       <li><a href="/signup">Sign Up</a></li>
+     {% endif %}
+   </ul>
  </div>
 {% endblock %}
 
@@ -27,7 +41,11 @@
   <div class="col-md-8">
     <h2>{{ blog.post_title }}</h2>
     <p>{{ blog.post_body }}</p>
-    <p>{{ blog.date_published }}</p>
+    <p>{{ blog.date_published }} | {{ blog.owner.username }}</p>
+    {% if user == blog.owner %}
+      <a class="btn btn-default">Edit</a>
+      <a class="btn btn-danger">Delete</a>
+    {% endif %}
   </div>
   <div class="col-md-4">
     <h4>Archives</h4>
