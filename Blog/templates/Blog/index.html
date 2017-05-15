@@ -38,15 +38,12 @@
 <hr/>
 <br/>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 col-md-offset-2">
     {% for post in posts %}
       <h2>{{ post.post_title }}</h2>
       <P>{{ post.post_body|truncatechars:300 }} <a href="{% url 'blog' year=post.year_published month=post.month_published post_id=post.id %}">Read More</a></p>
       <br>
     {% endfor %}
-  </div>
-  <div class="col-md-4">
-    <h4>Archives</h4>
   </div>
 </div>
 {% endblock %}
