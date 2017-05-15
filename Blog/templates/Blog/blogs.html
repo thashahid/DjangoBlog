@@ -12,7 +12,8 @@
 </div>
 <div class="collapse navbar-collapse" id="collapse">
    <ul class="nav navbar-nav">
-     <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+     <!--<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>-->
+     <li><a href="/">Home</a></li>
      <li><a href="/">About</a></li>
    </ul>
    <ul class="nav navbar-nav navbar-right">
@@ -36,13 +37,15 @@
 <h1>DjangoBlog</h1>
 <p>A demo blog app built in Django 1.11</p>
 <hr/>
-<br/>
 <div class="row">
   <div class="col-md-8">
-    {% for post in posts %}
-      <h2>{{ post.post_title }}</h2>
-      <P>{{ post.post_body|truncatechars:300 }} <a href="{% url 'blog' year=post.year_published month=post.month_published post_id=post.id %}">Read More</a></p>
-      <br>
+    {% if isYear == False %}
+      <h1>{{ month }} {{ year }}</h1>
+    {% else %}
+      <h1>{{ year }}</h1>
+    {% endif %}
+    {% for post in blog %}
+    <h2><a href="{% url 'blog' year=post.year_published month=post.month_published post_id=post.id %}">{{ post.post_title }}</a><h2>
     {% endfor %}
   </div>
   <div class="col-md-4">

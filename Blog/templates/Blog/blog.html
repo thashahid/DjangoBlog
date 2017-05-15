@@ -1,4 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+<style>
+.col-md-8 p {
+  font-size: 16pt;
+}
+
+.col-md-8 h1 {
+  font-weight: 400;
+}
+
+label {
+  display: none;
+}
+</style>
+{% endblock %}
 
 {% block navbar %}
 <div class="navbar-header">
@@ -34,22 +51,41 @@
 {% endblock %}
 
 {% block content %}
-<h1>DjangoBlog</h1>
-<p>A demo blog app built in Django 1.11</p>
-<hr/>
 <div class="row">
-  <div class="col-md-8">
-    <h2>{{ blog.post_title }}</h2>
+  <div class="col-md-8 col-md-offset-2">
+    <h1>{{ blog.post_title }}</h1>
+    <p>By: <a href="{% url 'user' blog.owner.username %}" style="font-size: 16pt;">{{ blog.owner.username }}</a></p>
+    <br>
+    <br>
     <p>{{ blog.post_body|linebreaks }}</p>
-    <br/>
-    <p>{{ blog.date_published }} | {{ blog.owner.username }}</p>
+    <br/><br/>
+    <!-- <p>{{ blog.date_published }} | {{ blog.owner.username }}</p>
     {% if user == blog.owner %}
       <a class="btn btn-default">Edit</a>
       <a class="btn btn-danger">Delete</a>
+    {% endif %} -->
+    <h2>Responses</h2>
+    <hr>
+    {% if user.is_authenticated %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form action="" method="post">
+          {% csrf_token %}
+          <!-- <textarea name="comment_body" class="form-control" placeholder="Write a response..." rows="3"></textarea> -->
+          {{ comment_form|crispy }}
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Post!</button>
+        </form>
+      </div>
+    </div>
     {% endif %}
-  </div>
-  <div class="col-md-4">
-    <h4>Archives</h4>
+    {% for comment in comments %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p><b>{{ comment.author }}</b></p>
+        <p>{{ comment.content|truncatechars:200 }}</p>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

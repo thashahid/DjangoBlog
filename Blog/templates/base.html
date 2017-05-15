@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Lato:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Lato:300,400" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
 
     <style>
@@ -14,17 +14,18 @@
       font-weight: lighter;
     }
     h1, h2, h3, h4, h5, h6 {
-      font-family: 'Lato', sans-serif;
-      font-weight: lighter;
+      font-family: 'Lato';
     }
 
     body {
       margin-bottom: 50px;
     }
     </style>
+    {% block style %}
+    {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-static-top">
       <div class="container">
         {% block navbar %}
         {% endblock %}
